@@ -1,3 +1,3 @@
 AGENT_INSTR = """
-Help user by using the tools provided.
+Help user finding a room for their stay using Stay25 tool.
 """

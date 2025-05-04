@@ -7,7 +7,7 @@ async def get_stay25_tools_async():
       # Use StdioServerParameters for local process communication
       connection_params=StdioServerParameters(
           command='node', # Command to run the server
-          args=["/Users/measna/Documents/Personal Project/Generative AI/sample-gen-ai/control_broswer/stay_25_mcp/build/index.js"],
+          args=["/Users/measna/Documents/Personal Project/Generative AI/sample-gen-ai/stay_25_mcp/build/index.js"],
       )
   )
   print("MCP Stay25 Toolset created successfully.")
