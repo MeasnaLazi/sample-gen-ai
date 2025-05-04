@@ -10,7 +10,7 @@ async def get_file_system_tools_async():
           args=["-y",    # Arguments for the command
                 "@modelcontextprotocol/server-filesystem",
                 # TODO: IMPORTANT! Change the path below to an ABSOLUTE path on your system.
-                "/Users/measna/Documents/Personal Project/Generative AI/GenAi/samples/control_broswer/data/"],
+                "/Users/measna/Documents/Personal Project/Generative AI/sample-gen-ai/control_broswer/allow_permission/"],
       )
       # For remote servers, you would use SseServerParams instead:
       # connection_params=SseServerParams(url="http://remote-server:port/path", headers={...})

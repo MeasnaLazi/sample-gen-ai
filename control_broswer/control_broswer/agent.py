@@ -1,7 +1,8 @@
 from google.adk.agents import LlmAgent
 from control_broswer import prompt
-from control_broswer.sub_agents.speadsheet_agent.agent import create_speadsheet_agent
+from control_broswer.sub_agents.airbnb_agent.agent import create_airbnb_agent
 from control_broswer.sub_agents.read_system_file_agent.agent import create_file_system_agent
+from control_broswer.sub_agents.playwright_agent.agent import create_playwright_agent
 from contextlib import AsyncExitStack
 
 
@@ -12,21 +13,25 @@ async def create_root_agent():
         
         # Create filesystem agent
         filesystem_agent, fs_exit_stack = await create_file_system_agent()
-        # Create Excel agent
-        excel_agent, excel_exit_stack = await create_speadsheet_agent()
-
-        # Push exit stack to root exit stack
         await root_exit_stack.enter_async_context(fs_exit_stack)
-        await root_exit_stack.enter_async_context(excel_exit_stack)
+        
+        #Create Airbnb agent
+        airbnb_agent, airbnb_exit_stack = await create_airbnb_agent()       
+        await root_exit_stack.enter_async_context(airbnb_exit_stack)
+
+        #Create Airbnb agent
+        playwright_agent, playwright_exit_stack = await create_playwright_agent()       
+        await root_exit_stack.enter_async_context(playwright_exit_stack)
 
         root_agent = LlmAgent(
             model="gemini-2.0-flash-001",
             name="root_agent",
-            description="A Quality Assurance using the services of multiple sub-agents",
+            description="A Manager using the services of multiple sub-agents",
             instruction=prompt.ROOT_AGENT_INSTR,
             sub_agents=[
                 filesystem_agent,
-                excel_agent
+                airbnb_agent,
+                playwright_agent
             ],
         )
 
